@@ -7,6 +7,13 @@ public class Account {
 	private long accountNumber;
 	private String name;
 	private String gender;
+	private String email;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	private String phone;
 	private String address;
 	private String accountType;
@@ -19,12 +26,13 @@ public class Account {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Account(long accountNumber, String name, String gender, String phone, String address, String accountType,
+	public Account(long accountNumber, String name, String gender,String email, String phone, String address, String accountType,
 			double balance, double creditLimit, LocalDateTime creationDate, LocalDateTime lastUpdated, String status) {
 		super();
 		this.accountNumber = accountNumber;
 		this.name = name;
 		this.gender = gender;
+		this.email = email;
 		this.phone = phone;
 		this.address = address;
 		this.accountType = accountType;
@@ -102,11 +110,12 @@ public class Account {
 	}
 	@Override
 	public String toString() {
-		return "Account [accountNumber=" + accountNumber + ", name=" + name + ", gender=" + gender + ", phone=" + phone
-				+ ", address=" + address + ", accountType=" + accountType + ", balance=" + balance + ", creditLimit="
-				+ creditLimit + ", creationDate=" + creationDate + ", lastUpdated=" + lastUpdated + ", status=" + status
-				+ "]";
+		return "Account [accountNumber=" + accountNumber + ", name=" + name + ", gender=" + gender + ", email=" + email
+				+ ", phone=" + phone + ", address=" + address + ", accountType=" + accountType + ", balance=" + balance
+				+ ", creditLimit=" + creditLimit + ", creationDate=" + creationDate + ", lastUpdated=" + lastUpdated
+				+ ", status=" + status + "]";
 	}
+	
 	
 	
 	

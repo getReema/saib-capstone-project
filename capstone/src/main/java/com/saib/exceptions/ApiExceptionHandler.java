@@ -1,4 +1,4 @@
-package com.saib.config;
+package com.saib.exceptions;
 
 import java.time.LocalDateTime;
 
@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.saib.config.ApiExceptionPayload;
 
 @ControllerAdvice
 public class ApiExceptionHandler {

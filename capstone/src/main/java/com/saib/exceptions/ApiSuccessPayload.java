@@ -1,4 +1,4 @@
-package com.saib.config;
+package com.saib.exceptions;
 
 import org.springframework.http.HttpStatus;
 

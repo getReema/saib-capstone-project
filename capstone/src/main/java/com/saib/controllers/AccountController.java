@@ -76,13 +76,19 @@ public class AccountController {
 	@PutMapping("/accounts/{accountNumber}")
 	public ResponseEntity<ApiSuccessPayload> updateAccount(@RequestBody Account account, @PathVariable long accountNumber)
 	{
-		return null;
+		String result=accountService.updateAccount(account, accountNumber);
+		ApiSuccessPayload payload=ApiSuccessPayload.build(result,result,HttpStatus.OK);
+		ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload, HttpStatus.OK);
+		return response;
 	}
 	
 	@DeleteMapping("/accounts/{accountNumber}")
 	public ResponseEntity<ApiSuccessPayload> deleteAccount(@PathVariable long accountNumber)
 	{
-		return null;
+		String result=accountService.deleteAccount(accountNumber);
+		ApiSuccessPayload payload=ApiSuccessPayload.build(result,result,HttpStatus.OK);
+		ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload, HttpStatus.OK);
+		return response;
 	}
 	
 	

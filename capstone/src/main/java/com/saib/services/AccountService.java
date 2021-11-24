@@ -34,26 +34,28 @@ public class AccountService {
 		
 	}
 	
+	// for Get /accounts/{AccountNumber}
 	public Account getAccountByAccountNumber(long accountNumber)
 	{
-		Optional<Account> optional=accountRepository.findById(accountNumber);
+		Optional<Account> optional=accountRepository.findById(accountNumber); // if exisit it will return.
 		
 		if(optional.isPresent()) {
 			return optional.get();
 		}
 		else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Account with Account Number:"+accountNumber+"doesn't exist");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Account with Account Number:"+accountNumber+"doesn't exist"); // throw error if it doesn't exist 
 		}
 		
 	}
 	
 	
+	//for Post /accounts
 	public String addAccount(Account account)
 	{
 		String result="";
-		Account storedAccount=accountRepository.save(account);
-		if(storedAccount!=null) {
-			result=Results.SUCCESS;
+		Account storedAccount=accountRepository.save(account); // using JPA method .save(), it will return the object just added
+		if(storedAccount!=null) { // if saved in DB and is ok? check the returned object
+			result=Results.SUCCESS; // Results is list of codes object 
 		}
 		else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Account not created");
@@ -61,6 +63,51 @@ public class AccountService {
 		
 		return result;
 	}
+	
+	
+	// recives  the account_object and the new accountNumber to be updated
+	public String updateAccount(Account account, long accountNumber)
+	{
+		String result="";
+
+		// edit the object of account
+		account.setAccountNumber(accountNumber);
+		// then save the account
+		Account updatedAccount=accountRepository.save(account);
+
+		if(updatedAccount!=null) // check the returned from save()
+		{
+			result=Results.SUCCESS;
+		}
+		else
+		{
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Record was not updated"); 
+		}
+		return result;
+
+	}
+	
+	
+	// recives the new accountNumber to be deleted
+	public String deleteAccount(long accountNumber)
+	{
+		String result="";
+		try {
+			
+		accountRepository.deleteById(accountNumber);
+			result=Results.SUCCESS;
+			return result;
+		}
+		catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+		}
+
+
+	}
+	
+	
+	
+	
 
 }
 

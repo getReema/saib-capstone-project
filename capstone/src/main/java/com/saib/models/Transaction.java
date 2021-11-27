@@ -14,13 +14,13 @@ public class Transaction {
 // write all attributes 
 	@Id
 	@Column(name = "transaction_id")
-	private int transactionID;
+	private long transactionID;
 	
 	@Column(name = "from_account")
-	private int fromAccount;
+	private long fromAccount;
 	
 	@Column(name = "to_account")
-	private int toAccounnt;
+	private long toAccounnt;
 	
 	@Column(name = "from_account_name")
 	private String fromAccountName;
@@ -68,7 +68,7 @@ public class Transaction {
 		this.status = status;
 	}
 
-	public int getTransactionID() {
+	public long getTransactionID() {
 		return transactionID;
 	}
 
@@ -76,7 +76,7 @@ public class Transaction {
 		this.transactionID = transactionID;
 	}
 
-	public int getFromAccount() {
+	public long getFromAccount() {
 		return fromAccount;
 	}
 
@@ -84,7 +84,7 @@ public class Transaction {
 		this.fromAccount = fromAccount;
 	}
 
-	public int getToAccounnt() {
+	public long getToAccounnt() {
 		return toAccounnt;
 	}
 

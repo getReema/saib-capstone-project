@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.saib.exceptions.ApiSuccessPayload;
@@ -15,8 +16,8 @@ import com.saib.services.TransactionService;
 @RestController
 public class TransactionController {
 	/*
-	 *  GET - /transactions - Get me all details 
-	 *  GET - /transactions/id - Get me details for a single account 
+	 *  GET - /transactions - Get me all details  - DONE
+	 *  GET - /transactions/id - Get me details for a single transaction  - DONE
 	 *  GET - transactions/type
 	 *  
 	 *  POST - /transactions - new 
@@ -41,7 +42,15 @@ public class TransactionController {
 	}
 	
 	
-	
+	@GetMapping("/transactions/{transactionID}")
+	public ResponseEntity<ApiSuccessPayload> getAccountbyAccountNumber(@PathVariable long transactionID)
+	{
+		Transaction transaction=transactionService.getTransactionTransactionID(transactionID);
+		
+		ApiSuccessPayload payload=ApiSuccessPayload.build(transaction, "Success",HttpStatus.OK);
+		ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload,HttpStatus.OK);
+		return response;
+	}
 	
 	
 }

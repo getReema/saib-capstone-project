@@ -95,6 +95,30 @@ public class AccountController {
 	
 	
 	
+	//getAccountByType
+	@GetMapping("/accounts/type/{type}")
+	public ResponseEntity<ApiSuccessPayload> getAccountByType (@PathVariable String type) {
+		List<Account> list=accountService.getAccountByType(type);
+		
+		ApiSuccessPayload payload=ApiSuccessPayload.build(list, "Accounts Fetched", HttpStatus.OK);
+		ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload,HttpStatus.OK);
+		
+		return response;
+		
+	}
 	
-
+	
+	//Status
+		@GetMapping("/accounts/status/{status}")
+		public ResponseEntity<ApiSuccessPayload> getAccountBySype (@PathVariable String status) {
+			List<Account> list=accountService.getAccountByStatus(status);
+			
+			ApiSuccessPayload payload=ApiSuccessPayload.build(list, "Accounts Fetched", HttpStatus.OK);
+			ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload,HttpStatus.OK);
+			
+			return response;
+			
+		}
+	
+	
 }

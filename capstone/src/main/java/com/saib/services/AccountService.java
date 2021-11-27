@@ -105,8 +105,33 @@ public class AccountService {
 
 	}
 	
+	public List<Account> getAccountByType(String type)
+	{
+		List<Account> list=accountRepository.findByAccountType(type);
+		
+//		Account account1=new Account(1000100,"Zartab", "Male", "zartab@codewithz.com","7715012345", "Some Address", "Savings", 10000.00, 100000.00, LocalDateTime.now(), LocalDateTime.now(), "Active");
+//		Account account2=new Account(1000100,"Sohail", "Male", "sohail@codewithz.com","7715012345", "Some Address", "Savings", 10000.00, 100000.00, LocalDateTime.now(), LocalDateTime.now(), "Active");
+//		
+//		list.add(account1);
+//		list.add(account2);
+		
+		return list;
+		
+	}
 	
-	
+	public List<Account> getAccountByStatus(String status)
+	{
+		List<Account> list=accountRepository.findByStatus(status);
+		
+//		Account account1=new Account(1000100,"Zartab", "Male", "zartab@codewithz.com","7715012345", "Some Address", "Savings", 10000.00, 100000.00, LocalDateTime.now(), LocalDateTime.now(), "Active");
+//		Account account2=new Account(1000100,"Sohail", "Male", "sohail@codewithz.com","7715012345", "Some Address", "Savings", 10000.00, 100000.00, LocalDateTime.now(), LocalDateTime.now(), "Active");
+//		
+//		list.add(account1);
+//		list.add(account2);
+		
+		return list;
+		
+	}
 	
 
 }

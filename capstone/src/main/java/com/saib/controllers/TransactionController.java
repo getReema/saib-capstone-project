@@ -7,11 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.saib.exceptions.ApiSuccessPayload;
+import com.saib.models.Account;
 import com.saib.models.Transaction;
 import com.saib.services.TransactionService;
+import com.saib.util.Results;
 
 @RestController
 public class TransactionController {
@@ -51,6 +55,27 @@ public class TransactionController {
 		ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload,HttpStatus.OK);
 		return response;
 	}
+	
+	
+	
+	@PostMapping("/transactions")
+	public ResponseEntity<ApiSuccessPayload> addTransaction(@RequestBody Transaction transaction)
+	{
+		ResponseEntity<ApiSuccessPayload> response=null;
+		System.out.println(transaction); // check if it's recived well?
+		String result=transactionService.addTransaction(transaction);
+		if(result.equalsIgnoreCase(Results.SUCCESS))
+		{
+			ApiSuccessPayload payload=ApiSuccessPayload.build(result, "Account created successfully", HttpStatus.CREATED);
+			response=new ResponseEntity<ApiSuccessPayload>(payload,HttpStatus.CREATED);
+		}
+		
+		return response;
+	
+	}
+	
+	
+	
 	
 	
 }

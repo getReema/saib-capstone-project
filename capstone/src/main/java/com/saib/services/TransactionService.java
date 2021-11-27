@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.saib.models.Account;
 import com.saib.models.Transaction;
 import com.saib.repository.TransactionRepository;
+import com.saib.util.Results;
 
 @Service
 public class TransactionService {
@@ -46,8 +47,20 @@ public class TransactionService {
 	}
 	
 	
-	
-	
+	//for Post /transaction
+		public String addTransaction(Transaction transaction)
+		{
+			String result="";
+			Transaction storedTransaction=transactionRepository.save(transaction); // using JPA method .save(), it will return the object just added
+			if(storedTransaction!=null) { // if saved in DB and is ok? check the returned object
+				result=Results.SUCCESS; // Results is list of codes object 
+			}
+			else {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Account not created");
+			}
+			
+			return result;
+		}
 	
 	
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ public class TransactionController {
 	 *  GET - transactions/type
 	 *  
 	 *  POST - /transactions - new transaction - DONE
-	 *  PUT - /transactions/id - Updating an existing trans 
+	 *  PUT - /transactions/id - Updating an existing trans -
 	 *  DELETE -/transactions/id - for deleting an trans from db
 	 *  
 	 */
@@ -83,6 +84,15 @@ public class TransactionController {
 		return response;
 	}
 	
+	
+	@DeleteMapping("/transactions/{transactionID}")
+	public ResponseEntity<ApiSuccessPayload> deleteTransaction(@PathVariable long transactionID)
+	{
+		String result=transactionService.deleteTransaction(transactionID);
+		ApiSuccessPayload payload=ApiSuccessPayload.build(result,result,HttpStatus.OK);
+		ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload, HttpStatus.OK);
+		return response;
+	}
 	
 	
 	

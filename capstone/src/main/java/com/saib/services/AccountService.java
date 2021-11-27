@@ -88,7 +88,7 @@ public class AccountService {
 	}
 	
 	
-	// recives the new accountNumber to be deleted
+	// recives the accountNumber to be deleted
 	public String deleteAccount(long accountNumber)
 	{
 		String result="";

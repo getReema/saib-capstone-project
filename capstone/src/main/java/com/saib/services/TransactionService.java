@@ -84,5 +84,21 @@ public class TransactionService {
 
 		}
 	
-	
+		//deleteTransaction
+		// recives the  Transaction Id to be deleted
+		public String deleteTransaction(long transactionID)
+		{
+			String result="";
+			try {
+				
+			transactionRepository.deleteById(transactionID);
+				result=Results.SUCCESS;
+				return result;
+			}
+			catch (Exception e) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+			}
+
+
+		}
 }

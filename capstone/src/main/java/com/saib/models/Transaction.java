@@ -72,7 +72,7 @@ public class Transaction {
 		return transactionID;
 	}
 
-	public void setTransactionID(int transactionID) {
+	public void setTransactionID(long transactionID) {
 		this.transactionID = transactionID;
 	}
 
@@ -80,7 +80,7 @@ public class Transaction {
 		return fromAccount;
 	}
 
-	public void setFromAccount(int fromAccount) {
+	public void setFromAccount(long fromAccount) {
 		this.fromAccount = fromAccount;
 	}
 
@@ -88,7 +88,7 @@ public class Transaction {
 		return toAccounnt;
 	}
 
-	public void setToAccounnt(int toAccounnt) {
+	public void setToAccounnt(long toAccounnt) {
 		this.toAccounnt = toAccounnt;
 	}
 

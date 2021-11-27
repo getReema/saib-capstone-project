@@ -21,13 +21,15 @@ import com.saib.util.Results;
 @RestController
 public class AccountController {
 	
-	/*
+	/* Done:
 	 *  GET - /accounts - Get me all details 
 	 *  GET - /accounts/id - Get me details for a single account 
 	 *  POST - /accounts - Creating a new account 
 	 *  PUT - /accounts/id - Updating an existing account 
 	 *  DELETE -/accounts/id - for deleting an account from db
 	 *  
+	 *  Not done:
+	 *  GET /accounts/type
 	 *  
 	 */
 	@Autowired

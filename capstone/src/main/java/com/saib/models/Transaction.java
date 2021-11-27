@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "transactions")
-public class Transactions {
+public class Transaction {
 
 // write all attributes 
 	@Id
@@ -46,12 +46,12 @@ public class Transactions {
 	@Column(name = "status")
 	private String status;
 
-	public Transactions() {
+	public Transaction() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Transactions(int transactionID, int fromAccount, int toAccounnt, String fromAccountName,
+	public Transaction(int transactionID, int fromAccount, int toAccounnt, String fromAccountName,
 			String sameBankTransaction, String otherBank, double amount, LocalDateTime date, LocalDateTime time,
 			String transactionType, String status) {
 		super();

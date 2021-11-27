@@ -9,3 +9,5 @@ import com.saib.models.Account;
 public interface AccountRepository extends JpaRepository<Account,Long>{
 
 }
+
+//

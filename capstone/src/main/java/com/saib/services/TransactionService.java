@@ -4,21 +4,24 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.saib.models.Transaction;
+import com.saib.repository.TransactionRepository;
 
 @Service
 public class TransactionService {
 
+	@Autowired
+	TransactionRepository transactionRepository;
+	
+	
 	public List<Transaction> getAllTransactions()
 	{
-		List<Transaction> list=new ArrayList<>();
+		List<Transaction> list= transactionRepository.findAll();
 
-		Transaction transaction1 = new Transaction(1, 100, 1010, "reema", "No", null, 50.0, LocalDateTime.now(), LocalDateTime.now(), "full", "completed");
-
-		list.add(transaction1);
-
+		list.toString();
 		return list;
 
 	}

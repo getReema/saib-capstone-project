@@ -23,7 +23,6 @@ public class TransactionController {
 	 *  PUT - /transactions/id - Updating an existing trans 
 	 *  DELETE -/transactions/id - for deleting an trans from db
 	 *  
-	 *  
 	 */
 	
 	@Autowired

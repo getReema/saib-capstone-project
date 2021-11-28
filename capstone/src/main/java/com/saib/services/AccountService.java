@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -133,7 +137,61 @@ public class AccountService {
 		
 	}
 	
+	public List<Account> getAccountsByGender(String gender){
+		
+		List<Account> list = accountRepository.findAccountByGender(gender);
+		return list;
+	}
+	
 
+	// Pagination 
+	public List<Account> getAllAccount(Integer pageNo, Integer pageSize) {
+
+		Pageable paging = PageRequest.of(pageNo, pageSize);
+
+		Page<Account> pageResult = accountRepository.findAll(paging);
+
+		int totalElements = pageResult.getNumberOfElements();
+		int total = pageResult.getTotalPages();
+
+		System.out.println("total=" + total + "  totalElements=" + totalElements);
+
+		if (pageResult.hasContent()) {
+
+			return pageResult.getContent();
+		} else {
+			return new ArrayList<Account>(); // return empty array
+		}
+
+	}
+	
+	
+	//sorting
+	public List<Account> getAllAccount(Integer pageNo, Integer pageSize, String sortBy) {
+
+		Pageable paging = PageRequest.of(pageNo, pageSize,Sort.by(sortBy));
+
+		Page<Account> pageResult = accountRepository.findAll(paging);
+
+		int totalElements = pageResult.getNumberOfElements();
+		int total = pageResult.getTotalPages();
+
+		System.out.println("total=" + total + "  totalElements=" + totalElements);
+
+		if (pageResult.hasContent()) {
+
+			return pageResult.getContent();
+		} else {
+			return new ArrayList<Account>(); // return empty array
+		}
+
+	}
+	
+	
+	
+	
+	
+	
 }
 
 

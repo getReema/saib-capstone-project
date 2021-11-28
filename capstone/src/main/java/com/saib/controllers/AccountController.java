@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.saib.exceptions.ApiSuccessPayload;
@@ -121,4 +122,39 @@ public class AccountController {
 		}
 	
 	
+		@GetMapping("/accounts/gender/{gender}")
+		public ResponseEntity<ApiSuccessPayload> getAccountByGender(@PathVariable String gender)
+		{
+			List<Account> list=accountService.getAccountsByGender(gender);
+			HttpStatus status=HttpStatus.OK; // create status here to use directly in following lines instead of HttpSatus.OK
+			ApiSuccessPayload payload=ApiSuccessPayload.build(list, "Accounts Found",status); 
+			ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload, status);
+			return response;
+			
+		}
+		
+		
+		@GetMapping("/accounts/all")
+		public ResponseEntity <ApiSuccessPayload> getAllAccounts (@RequestParam int pageNumber, @RequestParam int pageSize){
+			
+			List<Account> list=accountService.getAllAccount(pageNumber,pageSize);
+			HttpStatus status=HttpStatus.OK; // create status here to use directly in following lines instead of HttpSatus.OK
+			ApiSuccessPayload payload=ApiSuccessPayload.build(list, "Accounts Found",status); 
+			ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload, status);
+			return response;
+			
+		}
+		
+		@GetMapping("/accounts/all/sorted")
+		public ResponseEntity <ApiSuccessPayload> getAllAccounts (@RequestParam int pageNumber, @RequestParam int pageSize, @RequestParam String sortBy){
+			
+			List<Account> list=accountService.getAllAccount(pageNumber,pageSize, sortBy);
+			HttpStatus status=HttpStatus.OK; // create status here to use directly in following lines instead of HttpSatus.OK
+			ApiSuccessPayload payload=ApiSuccessPayload.build(list, "Accounts Found",status); 
+			ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload, status);
+			return response;
+			
+		}
+		
+		
 }

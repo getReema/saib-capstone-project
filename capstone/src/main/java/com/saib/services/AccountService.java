@@ -18,6 +18,8 @@ import com.saib.models.Account;
 import com.saib.repository.AccountRepository;
 import com.saib.util.Results;
 
+import io.sentry.Sentry;
+
 @Service
 public class AccountService {
 	
@@ -103,6 +105,7 @@ public class AccountService {
 			return result;
 		}
 		catch (Exception e) {
+			Sentry.captureException(e);
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 		}
 

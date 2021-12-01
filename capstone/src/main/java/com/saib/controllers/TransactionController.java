@@ -44,7 +44,7 @@ public class TransactionController {
 	public ResponseEntity<ApiSuccessPayload> getAllTransactions() {
 		List<Transaction> list = transactionService.getAllTransactions();
 
-		ApiSuccessPayload payload = ApiSuccessPayload.build(list, "Accounts Fetched", HttpStatus.OK);
+		ApiSuccessPayload payload = ApiSuccessPayload.build(list, "Transactions Fetched", HttpStatus.OK);
 		ResponseEntity<ApiSuccessPayload> response = new ResponseEntity<ApiSuccessPayload>(payload, HttpStatus.OK);
 
 		return response;
@@ -66,7 +66,7 @@ public class TransactionController {
 		System.out.println(transaction); // check if it's recived well?
 		String result = transactionService.addTransaction(transaction);
 		if (result.equalsIgnoreCase(Results.SUCCESS)) {
-			ApiSuccessPayload payload = ApiSuccessPayload.build(result, "Account created successfully",
+			ApiSuccessPayload payload = ApiSuccessPayload.build(result, "Transaction created successfully",
 					HttpStatus.CREATED);
 			response = new ResponseEntity<ApiSuccessPayload>(payload, HttpStatus.CREATED);
 		}
@@ -100,7 +100,7 @@ public class TransactionController {
 		List<Transaction> list = transactionService.getAllTransaction(pageNumber, pageSize);
 		HttpStatus status = HttpStatus.OK; // create status here to use directly in following lines instead of
 											// HttpSatus.OK
-		ApiSuccessPayload payload = ApiSuccessPayload.build(list, "Accounts Found", status);
+		ApiSuccessPayload payload = ApiSuccessPayload.build(list, "Transactions Found", status);
 		ResponseEntity<ApiSuccessPayload> response = new ResponseEntity<ApiSuccessPayload>(payload, status);
 		return response;
 
@@ -114,7 +114,7 @@ public class TransactionController {
 		List<Transaction> list = transactionService.getAllTransaction(pageNumber, pageSize, sortBy);
 		HttpStatus status = HttpStatus.OK; // create status here to use directly in following lines instead of
 											// HttpSatus.OK
-		ApiSuccessPayload payload = ApiSuccessPayload.build(list, "Accounts Found", status);
+		ApiSuccessPayload payload = ApiSuccessPayload.build(list, "Transactions Found", status);
 		ResponseEntity<ApiSuccessPayload> response = new ResponseEntity<ApiSuccessPayload>(payload, status);
 		return response;
 

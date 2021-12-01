@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "transactions")
 public class Transaction {
@@ -49,7 +51,9 @@ public class Transaction {
 	@Column(name = "date")
 	private LocalDate date;
 	
+	
 	@Column(name = "time")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="HH:mm:ss")
 	private LocalTime time;
 	
 	@Column(name = "transaction_type")

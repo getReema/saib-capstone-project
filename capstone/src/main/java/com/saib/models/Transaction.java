@@ -1,6 +1,8 @@
 package com.saib.models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +27,17 @@ public class Transaction {
 	@Column(name = "from_account_name")
 	private String fromAccountName;
 	
+	@Column(name="to_account_name")
+	private String toAccountName ;
+	
+	public String getToAccountName() {
+		return toAccountName;
+	}
+
+	public void setToAccountName(String toAccountName) {
+		this.toAccountName = toAccountName;
+	}
+
 	@Column(name = "same_bank_transaction")
 	private String sameBankTransaction;
 	
@@ -35,10 +48,10 @@ public class Transaction {
 	private double amount;
 	
 	@Column(name = "date")
-	private LocalDateTime date;
+	private LocalDate date;
 	
 	@Column(name = "time")
-	private LocalDateTime time;
+	private LocalTime time;
 	
 	@Column(name = "transaction_type")
 	private String transactionType;
@@ -51,14 +64,15 @@ public class Transaction {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Transaction(int transactionID, int fromAccount, int toAccounnt, String fromAccountName,
-			String sameBankTransaction, String otherBank, double amount, LocalDateTime date, LocalDateTime time,
+	public Transaction(int transactionID, int fromAccount, int toAccounnt, String fromAccountName, String toAccountName
+			,String sameBankTransaction, String otherBank, double amount, LocalDate date, LocalTime time,
 			String transactionType, String status) {
 		super();
 		this.transactionID = transactionID;
 		this.fromAccount = fromAccount;
 		this.toAccounnt = toAccounnt;
 		this.fromAccountName = fromAccountName;
+		this.toAccountName = toAccountName;
 		this.sameBankTransaction = sameBankTransaction;
 		this.otherBank = otherBank;
 		this.amount = amount;
@@ -124,19 +138,19 @@ public class Transaction {
 		this.amount = amount;
 	}
 
-	public LocalDateTime getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-	public LocalDateTime getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(LocalDateTime time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
@@ -159,7 +173,7 @@ public class Transaction {
 	@Override
 	public String toString() {
 		return "Transactions [transactionID=" + transactionID + ", fromAccount=" + fromAccount + ", toAccounnt="
-				+ toAccounnt + ", fromAccountName=" + fromAccountName + ", sameBankTransaction=" + sameBankTransaction
+				+ toAccounnt + ", fromAccountName=" + fromAccountName +"toAccountName"+ toAccountName+ ", sameBankTransaction=" + sameBankTransaction
 				+ ", otherBank=" + otherBank + ", amount=" + amount + ", date=" + date + ", time=" + time
 				+ ", transactionType=" + transactionType + ", status=" + status + "]";
 	}

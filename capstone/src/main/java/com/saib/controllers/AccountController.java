@@ -133,7 +133,7 @@ public class AccountController {
 			
 		}
 		
-		
+		//Pagination
 		@GetMapping("/accounts/all")
 		public ResponseEntity <ApiSuccessPayload> getAllAccounts (@RequestParam int pageNumber, @RequestParam int pageSize){
 			
@@ -145,6 +145,7 @@ public class AccountController {
 			
 		}
 		
+		//Sorting
 		@GetMapping("/accounts/all/sorted")
 		public ResponseEntity <ApiSuccessPayload> getAllAccounts (@RequestParam int pageNumber, @RequestParam int pageSize, @RequestParam String sortBy){
 			

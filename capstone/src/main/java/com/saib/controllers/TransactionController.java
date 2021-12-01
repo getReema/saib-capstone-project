@@ -1,8 +1,10 @@
 package com.saib.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.saib.exceptions.ApiSuccessPayload;
+import com.saib.models.Account;
 import com.saib.models.Transaction;
 import com.saib.services.TransactionService;
 import com.saib.util.Results;
@@ -94,7 +98,59 @@ public class TransactionController {
 		return response;
 	}
 	
-	
-	
-	
+	//Pagination
+			@GetMapping("/transactions/all")
+			public ResponseEntity <ApiSuccessPayload> getAllTransaction (@RequestParam int pageNumber, @RequestParam int pageSize){
+				
+				List<Transaction> list=transactionService.getAllTransaction(pageNumber,pageSize);
+				HttpStatus status=HttpStatus.OK; // create status here to use directly in following lines instead of HttpSatus.OK
+				ApiSuccessPayload payload=ApiSuccessPayload.build(list, "Accounts Found",status); 
+				ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload, status);
+				return response;
+				
+			}
+			
+			//Sorting
+			@GetMapping("/transactions/all/sorted")
+			public ResponseEntity <ApiSuccessPayload> getAllTransaction (@RequestParam int pageNumber, @RequestParam int pageSize, @RequestParam String sortBy){
+				
+				List<Transaction> list=transactionService.getAllTransaction(pageNumber,pageSize, sortBy);
+				HttpStatus status=HttpStatus.OK; // create status here to use directly in following lines instead of HttpSatus.OK
+				ApiSuccessPayload payload=ApiSuccessPayload.build(list, "Accounts Found",status); 
+				ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload, status);
+				return response;
+				
+			}
+			
+			//getTransactionByType
+			@GetMapping("/transactions/type/{transactionType}")
+			public ResponseEntity<ApiSuccessPayload> getTransactionByType(@PathVariable String transactionType)
+			{
+				List<Transaction> list=transactionService.getTransactionByType(transactionType);
+				
+				ApiSuccessPayload payload=ApiSuccessPayload.build(list, "Success",HttpStatus.OK);
+				ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload,HttpStatus.OK);
+				return response;
+			}
+			
+			
+			//findTransactionByDate
+			@GetMapping("/transactions/date/{date}")
+			public ResponseEntity<ApiSuccessPayload> findTransactionByDate( @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date)
+			{
+				List<Transaction> list=transactionService.findTransactionByDate(date);
+				ApiSuccessPayload payload= ApiSuccessPayload.build(list, "Success",HttpStatus.OK);
+				ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload,HttpStatus.OK);
+				return response;
+			}
+			
+			//findTransactionByDateAndTransactionType
+			@GetMapping("/transactions/{transactionType}/{date}")
+			public ResponseEntity<ApiSuccessPayload> findTransactionByDateAndTransactionType( @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, String transactionType )
+			{
+				List<Transaction> list=transactionService.findTransactionByDateAndTransactionType(date, transactionType);
+				ApiSuccessPayload payload= ApiSuccessPayload.build(list, "Success",HttpStatus.OK);
+				ResponseEntity<ApiSuccessPayload> response=new ResponseEntity<ApiSuccessPayload>(payload,HttpStatus.OK);
+				return response;
+			}
 }

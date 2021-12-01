@@ -1,13 +1,21 @@
 package com.saib.services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.saib.models.Account;
 import com.saib.models.Transaction;
 import com.saib.repository.TransactionRepository;
 import com.saib.util.Results;
@@ -101,4 +109,68 @@ public class TransactionService {
 
 
 		}
+		
+		// Pagination 
+		public List<Transaction> getAllTransaction(Integer pageNo, Integer pageSize) {
+
+			Pageable paging = PageRequest.of(pageNo, pageSize);
+
+			Page<Transaction> pageResult = transactionRepository.findAll(paging);
+
+			int totalElements = pageResult.getNumberOfElements();
+			int total = pageResult.getTotalPages();
+
+			System.out.println("total=" + total + "  totalElements=" + totalElements);
+
+			if (pageResult.hasContent()) {
+
+				return pageResult.getContent();
+			} else {
+				return new ArrayList<Transaction>(); // return empty array
+			}
+
 }
+	
+		
+		// Sorting 
+		public List<Transaction> getAllTransaction(Integer pageNo, Integer pageSize,String sortBy) {
+
+			Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+			Page<Transaction> pageResult = transactionRepository.findAll(paging);
+
+			int totalElements = pageResult.getNumberOfElements();
+			int total = pageResult.getTotalPages();
+
+			System.out.println("total=" + total + "  totalElements=" + totalElements);
+
+			if (pageResult.hasContent()) {
+
+				return pageResult.getContent();
+			} else {
+				return new ArrayList<Transaction>(); // return empty array
+			}
+
+}
+		
+		public List<Transaction> getTransactionByType(String transactionType){
+			
+			List<Transaction> list = transactionRepository.findTransactionByTransactionType(transactionType);
+			return list;
+		}
+		
+			
+		public List<Transaction> findTransactionByDate(LocalDate date){
+			List<Transaction> list = transactionRepository.findTransactionByDate(date);
+			return list;
+		}
+		
+		//findTransactionByDate
+		
+		//findTransactionByDateAndTransactionType
+		public List<Transaction> findTransactionByDateAndTransactionType(LocalDate date, String transactionType){
+			List<Transaction> list = transactionRepository.findTransactionByDateAndTransactionType(date,transactionType);
+			return list;
+		}
+}
+
